@@ -1,34 +1,18 @@
 import React from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './src/screens/Home';
 interface Props {
   
 }
 
+const Stack = createNativeStackNavigator();
 const App = (props: Props) => {
-  const handleOpenGallery = async () => {
-    const photos = await launchImageLibrary({
-      mediaType: 'photo',
-      quality: 1,
-      selectionLimit: 0
-    }, );
-
-    console.log({photos})
-  }
-  
-  return (
-    <View style={styles.container}>
-      <Button title="Open gallery" onPress={handleOpenGallery}/>
-    </View>
-  )
+  return (<NavigationContainer>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  </NavigationContainer>)
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center',
-  }
-})
 
 export default App
